@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 34
+    buildToolsVersion '30.0.3'
+
+    namespace 'com.android.Scanning'
+    defaultConfig {
+        applicationId "com.jck.scanning"
+        minSdkVersion 21
+        targetSdkVersion 34
+
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        ndk {
+            abiFilters 'x86','armeabi-v7a'
+        }
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+    }
+
+    signingConfigs {
+        config {
+
+        }
+    }
+
+    buildTypes {
+        release {
+//            signingConfig signingConfigs.config
+            zipAlignEnabled false
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+//            signingConfig signingConfigs.config
+            zipAlignEnabled false
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.aar'])
+
+//    implementation "com.github.getActivity:XXPermissions:18.0"
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.activity:activity:1.9.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    implementation project(':jckscan')
+}
